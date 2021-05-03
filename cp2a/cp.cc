@@ -19,11 +19,11 @@ void correlate(int ny, int nx, const float *data, float *result)
 
     std::vector<double> mat;
 
-
+    int x = 0;
     for(int y = 0 ; y < ny ; y++)
     {
         double sum = 0;
-        for(int x = 0 ; x < nx ; x++)
+        for(x = 0 ; x < nx ; x++)
         {
             sum += static_cast<double>(data[y*nx + x]);
         }
