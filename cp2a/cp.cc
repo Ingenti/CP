@@ -10,17 +10,8 @@ This is the function you need to implement. Quick reference:
 - only parts with 0 <= j <= i < ny need to be filled
 */
 
-double calculate_mean(double *temp)
-{
-    double sum = 0;
-    int counter = 0;
-    for(counter;counter < sizeof(temp)/sizeof(temp[0]);counter++)
-    {
-        sum += temp[counter];
-    }
+    
 
-    return (sum/counter);
-}
 
 
 void correlate(int ny, int nx, const float *data, float *result) 
@@ -32,46 +23,42 @@ void correlate(int ny, int nx, const float *data, float *result)
     int x = 0;
     for(y = 0 ; y < ny ; y++)
     {
-        // Save a row in temp
-        double temp[sizeof(data)/(sizeof(data[0])*nx)] = {};
-        
-        // Cast to double precision and save row as temp
-        for (x = 0 ; x < nx ; x++)
+        double sum = 0;
+        for(x = 0 ; x < nx ; x++)
         {
-            temp[x] = static_cast<double>(data[y*nx + x]);
+            sum += static_cast<double>(data[y*nx + x]);
         }
 
         // Calculate the mean of the row
-        double mean = calculate_mean(temp);
+        double mean = (sum/static_cast<double>(nx));
         
         // Normalize the row by subtracting mean from each of the elements
         // Normalize so that the sum of the squares is 1
-        // Sum of the elements == mean*nx
-        double squaresum = pow(mean*nx,2);
+        double stde = 0;
+        for(x = 0; x < nx; x++)
+        {
+            stde+=pow(data[y*nx+x]-mean,2);
+        }
+        stde = sqrt(stde/static_cast<double>(nx));
 
         for(x = 0; x < nx ; x++)
         {
-            // Save values to mat
-            mat.push_back((temp[x] - mean)/squaresum);
+            mat.push_back((static_cast<double>(data[y*nx + x])-mean)/stde);
         }
     }
 
-    double div = sizeof(result)/sizeof(result[0]);
-    #pragma omp parallel for
-    for(int i = 0; i<ny-1; i++)
+
+
+    for(int c = 0; c < ny; c++)
     {
-        for(int j = 0; j < nx; j++)
+        for(int i = c; i < ny; i++)
         {
-            result[i+j*ny] = mat[j+i*nx]*mat[j+(i+1)*nx]/(div);
-        }
+            double ss = 0;
+            for(int j = 0; j < nx; j++)
+            {
+                ss += mat[j+c*nx]*mat[j+i*nx];
+            }
+            result[i+c*ny] = ss/static_cast<double>(nx);
+        }   
     }
-}
-    
-
-int main()
-
-{
-    
-    return 0;
-
 }
