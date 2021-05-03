@@ -56,7 +56,7 @@ void correlate(int ny, int nx, const float *data, float *result)
         }
     }
 
-    double div = (sizeof(result)/sizeof(result[0]);
+    double div = sizeof(result)/sizeof(result[0]);
     #pragma omp parallel for
     for(int i = 0; i<ny-1; i++)
     {
