@@ -11,7 +11,7 @@ This is the function you need to implement. Quick reference:
 - correlation between rows i and row j has to be stored in result[i + j*ny]
 - only parts with 0 <= j <= i < ny need to be filled
 */
-typedef __attribute__ ((ext_vector_type (4)))  float double4_t;
+typedef double double4_t __attribute__ ((vector_size (4 * sizeof(double))));
 
 static double4_t* double4_t_alloc(std::size_t n) {
     void* tmp = 0;
