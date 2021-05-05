@@ -38,7 +38,7 @@ void correlate(int ny, int nx, const float *data, float *result)
             stde+=pow(data[y*nx+x]-mean,2);
         }
         stde = sqrt(stde/nx);
-
+        #pragma omp parallel for
         for(x = 0; x < nx ; x++)
         {
             mat.push_back((static_cast<double>(data[y*nx + x])-mean)/stde);
