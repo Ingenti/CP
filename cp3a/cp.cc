@@ -88,13 +88,13 @@ void correlate(int ny, int nx, const float *data, float *result)
 
     for(int i = 0 ; i < ny ; i++)
     {
+        std::cout << "haloo!!!" << std::endl;
         for(int j = i; j < nvrow ; j++)
         {
             double4_t row = vd[i*nvrow];
             double4_t row2 = vd[j*nvrow];
             row = corr(row);
             row2 = corr(row2);
-            std::cout << "Taalllaaaa!!!" << std::endl;
             double4_t pairwisemultip = row*row2;
             result[j+i*ny] = sum(pairwisemultip)/nx;
             std::cout << result[j+i*ny] << std::endl;
