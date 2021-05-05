@@ -83,6 +83,8 @@ void correlate(int ny, int nx, const float *data, float *result)
         }    
     }
 
+    std::cout << "Taalllaaaa!!!" << std::endl;
+
 
     for(int y = 0 ; y < ny ; y++)
     {
