@@ -94,8 +94,10 @@ void correlate(int ny, int nx, const float *data, float *result)
             double4_t row2 = vd[k*nvrow];
             row = corr(row);
             row2 = corr(row2);
+            std::cout << "Taalllaaaa!!!" << std::endl;
             double4_t pairwisemultip = row*row2;
             result[k+y*ny] = sum(pairwisemultip)/nx;
+            std::cout << result[k+y*ny] << std::endl;
         }
     }
     std::free(vd);
