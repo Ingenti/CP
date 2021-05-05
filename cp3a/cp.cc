@@ -26,7 +26,7 @@ static double4_t* double4_t_alloc(std::size_t n) {
 double sum(double4_t a)
 {
     double sum = 0;
-    int len = sizeof(a)/sizeof(double4_t);
+    int len = sizeof(a)/sizeof(double);
     for(int i = 0; i < len; i++)
     {
         sum += a[i];
@@ -36,14 +36,14 @@ double sum(double4_t a)
 
 void corr(double4_t* a)
 {
-    double sum = 0;
+    double summa = 0;
     std::cout << "haloo!!!" << std::endl;
-    int len = sizeof(a)/sizeof(double4_t);
+    int len = sizeof(a)/sizeof(a[0]);
     for(int i = 0; i < len ; i++)
     {
-        sum += a[i];
+        summa += sum(a[i]);
     }
-    double mean = sum/len;
+    double mean = summa/len;
     std::cout << mean << std::endl;
 
 
@@ -91,8 +91,8 @@ void correlate(int ny, int nx, const float *data, float *result)
             for(int c = 0; c < nvrow; c++)
             {
                 // Choose two rows to calculate corr for
-                double4_t* row[c+i*nvrow] = vd[c+i*nrow];
-                double4_t* row2[c+j*nvrow] = vt[c+j*nrow];
+                double4_t* row[c] = vd[c+i*nrow];
+                double4_t* row2[c] = vt[c+j*nrow];
                 corr(row)
 
 
