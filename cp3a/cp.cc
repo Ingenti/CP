@@ -22,7 +22,7 @@ void correlate(int ny, int nx, const float *data, float *result)
     for(y = 0 ; y < ny ; y++)
     {
         double sum = 0;
-        #pragma omp parallel for
+        //#pragma omp parallel for
         for(x = 0 ; x < nx ; x++)
         {
             sum += static_cast<double>(data[y*nx + x]);
