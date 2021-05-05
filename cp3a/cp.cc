@@ -66,11 +66,8 @@ void correlate(int ny, int nx, const float *data, float *result)
 {
     //elements per vector, using doubles here which take 64 bits each (4x in total 256bit == vector registry size)
     constexpr int nb = 4;
-    std::vector<double> mat;
     // vectors per input row
     int nvrow = nx/nb;
-
-    
 
     double4_t* vd = double4_t_alloc(ny*nvrow);
     
@@ -96,13 +93,13 @@ void correlate(int ny, int nx, const float *data, float *result)
                 double4_t row2 = vd[j*nvrow+c];
                 row = corr(row);
                 row2 = corr(row2);
-
                 double4_t pairwisemultip = row*row2;
-
                 result[i+j*ny] = sum(pairwisemultip)/nx;
             }
         }
     }
+
+    std::free(vt);
 }
 
 
