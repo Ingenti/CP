@@ -34,11 +34,10 @@ double sum(double4_t a)
     return sum;
 }
 
-double4_t corr(double4_t a)
+void corr(double4_t* a)
 {
-    double4_t res;
     double sum = 0;
-
+    std::cout << "haloo!!!" << std::endl;
     int len = sizeof(a)/sizeof(double4_t);
     for(int i = 0; i < len ; i++)
     {
@@ -56,10 +55,8 @@ double4_t corr(double4_t a)
 
     for(int x = 0; x < len; x++)
     {
-        res[x] = (a[x]-mean)/stde;
+        a[x] = (a[x]-mean)/stde;
     }
-
-    return res;
 }
 
 
@@ -72,7 +69,8 @@ void correlate(int ny, int nx, const float *data, float *result)
     int nvrow = static_cast<int>(nrow);
 
     double4_t* vd = double4_t_alloc(ny*nvrow);
-    
+    double4_t* vt = double4_t_alloc(ny*nvrow);
+
     for(int y = 0 ; y < ny ; y++)
     {
         for(int k = 0 ; k < nvrow ; k++)
@@ -80,25 +78,37 @@ void correlate(int ny, int nx, const float *data, float *result)
             for(int x = 0 ; x < nb ; x++)
             {
                 vd[nvrow*y+k][x] = static_cast<double>(data[y*nx + x]);
+                vd[nvrow*y+k][x] = static_cast<double>(data[y*nx + x]);
             }
         }    
     }
 
-    std::cout << "Taalllaaaa!!!" << std::endl;
-
 
     for(int i = 0 ; i < ny ; i++)
     {
-        for(int j = 0; j < ny ; j++)
+        for(int j = i; j < ny ; j++)
         {
-            std::cout << "haloo!!!" << std::endl;
-            double4_t row = vd[i*nvrow];
-            double4_t row2 = vd[j*nvrow];
+            for(int c = 0; c < nvrow; c++)
+            {
+                // Choose two rows to calculate corr for
+                double4_t* row[c+i*nvrow] = vd[c+i*nrow];
+                double4_t* row2[c+j*nvrow] = vt[c+j*nrow];
+                corr(row)
+
+
+            }
+
+
+
+
+
+
+/*
             row = corr(row);
             row2 = corr(row2);
             double4_t pairwisemultip = row*row2;
             result[j+i*ny] = sum(pairwisemultip)/nx;
-            std::cout << result[j+i*ny] << std::endl;
+            std::cout << result[j+i*ny] << std::endl;*/
         }
     }
     std::free(vd);
