@@ -88,9 +88,9 @@ void correlate(int ny, int nx, const float *data, float *result)
 
     for(int i = 0 ; i < ny ; i++)
     {
-        std::cout << "haloo!!!" << std::endl;
         for(int j = i; j < nvrow ; j++)
         {
+            std::cout << "haloo!!!" << std::endl;
             double4_t row = vd[i*nvrow];
             double4_t row2 = vd[j*nvrow];
             row = corr(row);
