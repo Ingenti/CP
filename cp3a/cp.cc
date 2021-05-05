@@ -15,7 +15,7 @@ typedef double double4_t __attribute__ ((vector_size (4 * sizeof(double))));
 
 static double4_t* double4_t_alloc(std::size_t n) {
     void* tmp = 0;
-    if (posix_memalign(&tmp, sizeof(double4_t), sizeof(double4_t) * n + 1)) {
+    if (posix_memalign(&tmp, sizeof(double4_t), sizeof(double4_t) * n)) {
         throw std::bad_alloc();
     }
     return (double4_t*)tmp;
