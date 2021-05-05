@@ -45,6 +45,7 @@ double4_t corr(double4_t a)
         sum += a[i];
     }
     double mean = sum/len;
+    std::cout << mean << std::endl;
 
 
     double stde = 0;
@@ -95,7 +96,6 @@ void correlate(int ny, int nx, const float *data, float *result)
             result[k+y*ny] = sum(pairwisemultip)/nx;
         }
     }
-
     std::free(vd);
 }
 
