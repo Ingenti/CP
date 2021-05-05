@@ -10,8 +10,6 @@ This is the function you need to implement. Quick reference:
 - only parts with 0 <= j <= i < ny need to be filled
 */
 
-    
-
 
 
 void correlate(int ny, int nx, const float *data, float *result) 
@@ -19,8 +17,9 @@ void correlate(int ny, int nx, const float *data, float *result)
 
     std::vector<double> mat;
 
+    int y = 0;
     int x = 0;
-    for(int y = 0 ; y < ny ; y++)
+    for(y = 0 ; y < ny ; y++)
     {
         double sum = 0;
         for(x = 0 ; x < nx ; x++)
@@ -29,7 +28,7 @@ void correlate(int ny, int nx, const float *data, float *result)
         }
 
         // Calculate the mean of the row
-        double mean = (sum/nx);
+        double mean = (sum/static_cast<double>(nx));
         
         // Normalize the row by subtracting mean from each of the elements
         // Normalize so that the sum of the squares is 1
@@ -38,7 +37,7 @@ void correlate(int ny, int nx, const float *data, float *result)
         {
             stde+=pow(data[y*nx+x]-mean,2);
         }
-        stde = sqrt(stde/nx);
+        stde = sqrt(stde/static_cast<double>(nx));
 
         for(x = 0; x < nx ; x++)
         {
@@ -56,7 +55,7 @@ void correlate(int ny, int nx, const float *data, float *result)
             {
                 ss += mat[j+c*nx]*mat[j+i*nx];
             }
-            result[i+c*ny] = ss/nx;
+            result[i+c*ny] = ss/static_cast<double>(nx);
         }   
     }
 }
