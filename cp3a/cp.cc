@@ -2,7 +2,7 @@
 #include <vector>
 #include <stdlib.h>
 #include <malloc.h>
-
+#include <iostream>
 /*
 This is the function you need to implement. Quick reference:
 - input rows: 0 <= y < ny
