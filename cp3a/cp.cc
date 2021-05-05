@@ -96,7 +96,7 @@ void correlate(int ny, int nx, const float *data, float *result)
             row2 = corr(row2);
             std::cout << "Taalllaaaa!!!" << std::endl;
             double4_t pairwisemultip = row*row2;
-            result[j+i*ni] = sum(pairwisemultip)/nx;
+            result[j+i*ny] = sum(pairwisemultip)/nx;
             std::cout << result[j+i*ny] << std::endl;
         }
     }
