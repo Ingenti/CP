@@ -1,5 +1,7 @@
 #include "math.h"
 #include <vector>
+#include <stdlib.h>
+#include <malloc.h>
 
 /*
 This is the function you need to implement. Quick reference:
@@ -9,24 +11,105 @@ This is the function you need to implement. Quick reference:
 - correlation between rows i and row j has to be stored in result[i + j*ny]
 - only parts with 0 <= j <= i < ny need to be filled
 */
+typedef __attribute__ ((ext_vector_type (4)))  float double4_t;
 
+static double4_t* double4_t_alloc(std::size_t n) {
+    void* tmp = 0;
+    if (posix_memalign(&tmp, sizeof(double4_t), sizeof(double4_t) * n)) {
+        throw std::bad_alloc();
+    }
+    return (double4_t*)tmp;
+}
+
+
+
+double sum(double4_t a)
+{
+    double sum = 0;
+    int len = sizeof(a)/sizeof(double4_t);
+    for(int i = 0; i < len; i++)
+    {
+        sum += a[i];
+    }
+    return sum;
+}
+
+double4_t corr(double4_t a)
+{
+    double4_t res;
+    double sum = 0;
+
+    int len = sizeof(a)/sizeof(double4_t);
+    for(int i = 0; i < len ; i++)
+    {
+        sum += a[i];
+    }
+    double mean = sum/len;
+
+
+    double stde = 0;
+    for(int x = 0; x < len; x++)
+    {
+        stde+=pow(a[x]-mean,2);
+    }
+
+    for(int x = 0; x < len; x++)
+    {
+        res[x] = (a[x]-mean)/stde;
+    }
+
+    return res;
+}
 
 
 void correlate(int ny, int nx, const float *data, float *result) 
 {
-
+    //elements per vector, using doubles here which take 64 bits each (4x in total 256bit == vector registry size)
+    constexpr int nb = 4;
     std::vector<double> mat;
+    // vectors per input row
+    int nvrow = nx/nb;
 
-    int x = 0;
+    
+
+    double4_t* vd = double4_t_alloc(ny*nvrow);
+    
     for(int y = 0 ; y < ny ; y++)
     {
-        double sum = 0;
-        //#pragma omp parallel for
-        for(x = 0 ; x < nx ; x++)
+        for(int k = 0 ; k < nvrow ; k++)
         {
-            sum += static_cast<double>(data[y*nx + x]);
-        }
+            for(int x = 0 ; x < nb ; x++)
+            {
+                vd[k*y+x] = static_cast<double>(data[y*nx + x]);
+            }
+        }    
+    }
 
+
+    for(int i = 0 ; i < ny ; i++)
+    {
+        for(int j = i; j < ny ; j++)
+        {
+            for(int c = 0; c < nvrow; c++)
+            {
+                double4_t row = vd[i*nvrow+c];
+                double4_t row2 = vd[j*nvrow+c];
+                row = corr(row);
+                row2 = corr(row2);
+
+                double4_t pairwisemultip = row*row2;
+
+                result[i+j*ny] = sum(pairwisemultip)/nx;
+            }
+        }
+    }
+}
+
+
+
+
+/*
+        double sum = 0;
         // Calculate the mean of the row
         double mean = sum/nx;
         
@@ -45,17 +128,29 @@ void correlate(int ny, int nx, const float *data, float *result)
         }
     }
 
+
     #pragma omp parallel for  
     for(int c = 0; c < ny; c++)
     {
         for(int i = c; i < ny; i++)
         {
+            double s = 0;
             double ss = 0;
             for(int j = 0; j < nx; j++)
             {
+                double4_t row = vd[]
                 ss += mat[j+c*nx]*mat[j+i*nx];
             }
             result[i+c*ny] = ss/nx;
         }   
     }
 }
+
+for(int i = 0; i < nx ; i++)
+{
+    double4_t row = vd[i];
+    double4_t row2 = vt[i];
+    row*row2
+}
+
+*/
