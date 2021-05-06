@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <malloc.h>
 #include <iostream>
+#include <limits>
 /*
 This is the function you need to implement. Quick reference:
 - input rows: 0 <= y < ny
@@ -12,6 +13,11 @@ This is the function you need to implement. Quick reference:
 - only parts with 0 <= j <= i < ny need to be filled
 */
 typedef double double4_t __attribute__ ((vector_size (4 * sizeof(double))));
+constexpr double infty = std::numeric_limits<double>::infinity();
+
+constexpr double4_t d4infty {
+    infty, infty, infty, infty,
+};
 
 static double4_t* double4_t_alloc(std::size_t n) {
     void* tmp = 0;
