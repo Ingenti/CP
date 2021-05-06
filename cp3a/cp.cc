@@ -56,7 +56,7 @@ void corr(double4_t* a, int nvrow, int nx)
     double rowstde = 0;
 
     // Calculate stde of the row
-    for(int x = 0; x < len; x++)
+    for(int x = 0; x < nvrow; x++)
     {
         stde = sum((a[x]-mean)*(a[x]-mean), nx);
         rowstde += stde;
