@@ -80,11 +80,11 @@ void correlate(int ny, int nx, const float *data, float *result)
     double4_t* vd = double4_t_alloc(ny*nvrow);
     double4_t* vt = double4_t_alloc(ny*nvrow);
 
-    for(int y = 0 ; y < ny ; y++)
+    for(int y = 0 ; y < ny ; ++y)
     {
-        for(int k = 0 ; k < nvrow ; k++)
+        for(int k = 0 ; k < nvrow ; ++k)
         {
-            for(int x = 0 ; x < nb ; x++)
+            for(int x = 0 ; x < nb ; ++x)
             {
                 vd[nvrow*y+k][x] = static_cast<double>(data[y*nx + x]);
                 vd[nvrow*y+k][x] = static_cast<double>(data[y*nx + x]);
