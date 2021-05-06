@@ -74,8 +74,8 @@ void correlate(int ny, int nx, const float *data, float *result)
     //elements per vector, using doubles here which take 64 bits each (4x in total 256bit == vector registry size)
     constexpr int nb = 4;
     // vectors per input row
-    float nrow = ceil(nx/nb);
-    int nvrow = static_cast<int>(nrow);
+    //float nrow = ceil(nx/nb);
+    int nvrow = (ny+nb-1)/nb;
     std::cout << nvrow << std::endl;
 
     double4_t* vd = double4_t_alloc(ny*nvrow);
