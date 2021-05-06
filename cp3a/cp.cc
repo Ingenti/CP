@@ -37,14 +37,12 @@ double sum(double4_t a, int nx)
         sum += a[i];
         std::cout << a[i] << std::endl;
     }
-    std::cout << "break" << std::endl;
     return sum;
 }
 
 void corr(double4_t* a, int nvrow, int nx)
 {
     double summa = 0;
-    int len = nvrow;
 
     // Calculate the sum of the vectors of a row == sum of the row
     for(int i = 0; i < nvrow ; i++)
@@ -66,7 +64,7 @@ void corr(double4_t* a, int nvrow, int nx)
 
 
     // Finally, modify the array
-    for(int x = 0; x < len; x++)
+    for(int x = 0; x < nvrow; x++)
     {
         a[x] = (a[x]-mean)/rowstde;
     }
@@ -81,6 +79,8 @@ void correlate(int ny, int nx, const float *data, float *result)
     //float nrow = ceil(nx/nb);
     int nvrow = (ny+nb-1)/nb;
     std::cout << "Number of vectors per row: "<< nvrow << std::endl;
+    double4_t* test = double4_t_alloc(nvrow);
+    sum(test[0],5);
 
     double4_t* vd = double4_t_alloc(ny*nvrow);
     double4_t* vt = double4_t_alloc(ny*nvrow);
