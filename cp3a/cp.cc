@@ -75,7 +75,7 @@ void correlate(int ny, int nx, const float *data, float *result)
     // vectors per input row
     //float nrow = ceil(nx/nb);
     int nvrow = (ny+nb-1)/nb;
-    std::cout << nvrow << std::endl;
+    std::cout << "Number of vectors per row: "<< nvrow << std::endl;
 
     double4_t* vd = double4_t_alloc(ny*nvrow);
     double4_t* vt = double4_t_alloc(ny*nvrow);
@@ -84,7 +84,7 @@ void correlate(int ny, int nx, const float *data, float *result)
     {
         for(int k = 0 ; k < nvrow ; ++k)
         {
-            for(int x = 0 ; x < nb ; ++x)
+            for(int x = 0 ; x < std::min(nb,nx) ; ++x)
             {
                 vd[nvrow*y+k][x] = static_cast<double>(data[y*nx + x]);
                 vd[nvrow*y+k][x] = static_cast<double>(data[y*nx + x]);
