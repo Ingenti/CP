@@ -37,6 +37,7 @@ double sum(double4_t a, int nx)
         sum += a[i];
         std::cout << a[i] << std::endl;
     }
+    std::cout << "break" << std::endl;
     return sum;
 }
 
