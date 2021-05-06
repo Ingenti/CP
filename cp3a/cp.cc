@@ -104,24 +104,19 @@ void correlate(int ny, int nx, const float *data, float *result)
                 // Choose two rows to calculate corr for
                 row[c] = vd[c+i*nvrow];
                 row2[c] = vt[c+j*nvrow];
-                corr(row);
-
-
             }
-
-
-
-
-
-
-/*
-            row = corr(row);
-            row2 = corr(row2);
-            double4_t pairwisemultip = row*row2;
-            result[j+i*ny] = sum(pairwisemultip)/nx;
-            std::cout << result[j+i*ny] << std::endl;*/
+                for(int rivi = 0; rivi < nvrow; rivi++)
+                {
+                    corr(row);
+                    corr(row2);
+                    result[j+i*ny] += sum(row[rivi]*row2[rivi]);
+                }
+                result[j+i*ny] /= nx;
+            std::free(row);
+            std::free(row2);
         }
     }
+    std::free(vt);
     std::free(vd);
 }
 
