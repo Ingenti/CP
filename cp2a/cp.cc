@@ -44,9 +44,9 @@ void correlate(int ny, int nx, const float *data, float *result)
     }
 
 
-    for(int c = 0; c < ny; c++)
+    for(int c = 0; c < ny; c=c+2)
     {
-        for(int i = c; i < ny; i=i+2)
+        for(int i = c; i < ny; i++)
         {
             double s = 0;
             double ss = 0;
