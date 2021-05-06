@@ -51,10 +51,9 @@ void correlate(int ny, int nx, const float *data, float *result)
         for(int i = c; i < ny; i++)
         {
             double ss = 0;
-            for(int j = 0; j < nx/2; j=j+2)
+            for(int j = 0; j < nx; j++)
             {
                 ss += mat[j+c*nx]*mat[j+i*nx];
-                ss += mat[(j+1)+c*nx]*mat[(j+1)+i*nx];
             }
             result[i+c*ny] = ss/static_cast<double>(nx);
         }   
