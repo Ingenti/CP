@@ -27,11 +27,11 @@ double sum(double4_t a)
 {
     double sum = 0;
     int len = sizeof(a)/sizeof(a[0]);
-    std::cout << len << std::endl;
     for(int i = 0; i < len; i++)
     {
         sum += a[i];
     }
+    std::cout << sum << std::endl;
     return sum;
 }
 
