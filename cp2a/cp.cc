@@ -15,11 +15,9 @@ This is the function you need to implement. Quick reference:
 void correlate(int ny, int nx, const float *data, float *result) 
 {
 
-    std::vector<double> mat;
-
-    int y = 0;
+    std::vector<double> mat = {};
     int x = 0;
-    for(y = 0 ; y < ny ; y++)
+    for(int y = 0 ; y < ny ; y++)
     {
         double sum = 0;
         for(x = 0 ; x < nx ; x++)
@@ -28,7 +26,7 @@ void correlate(int ny, int nx, const float *data, float *result)
         }
 
         // Calculate the mean of the row
-        double mean = (sum/static_cast<double>(nx));
+        double mean = (sum/nx);
         
         // Normalize the row by subtracting mean from each of the elements
         // Normalize so that the sum of the squares is 1
@@ -37,7 +35,7 @@ void correlate(int ny, int nx, const float *data, float *result)
         {
             stde+=pow(data[y*nx+x]-mean,2);
         }
-        stde = sqrt(stde/static_cast<double>(nx));
+        stde = sqrt(stde/nx);
 
         for(x = 0; x < nx ; x++)
         {
@@ -55,7 +53,7 @@ void correlate(int ny, int nx, const float *data, float *result)
             for(int j = 0; j < nx; j++)
             {
                 ss += mat[j+c*nx]*mat[j+i*nx];
-                s += mat[j+(c+1)*nx]*mat[j+i*nx];
+                s += mat[j+(c+1)*nx]*mat[j+(i+1)*nx];
             }
             result[i+c*ny] = ss/nx;
             result[i+(c+1)*ny] = s/nx;
