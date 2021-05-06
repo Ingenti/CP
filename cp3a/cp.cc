@@ -51,7 +51,7 @@ void corr(double4_t* a, int nvrow, int nx)
     }
 
 
-    double mean = summa/len;
+    double mean = summa/(nx);
     double stde = 0;
     double rowstde = 0;
 
