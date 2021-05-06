@@ -95,7 +95,7 @@ void correlate(int ny, int nx, const float *data, float *result)
             }
         }    
     }
-    sum(vd[0]);
+    sum(vd[0], nx);
 
     for(int i = 0 ; i < ny ; i++)
     {
