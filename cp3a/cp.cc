@@ -35,7 +35,7 @@ double sum(double4_t a)
     for(int i = 0; i < 4; i++)
     {
         sum += a[i];
-        std::cout << a[i] << std::cout;
+        std::cout << a[i] << std::endl;
     }
     return sum;
 }
