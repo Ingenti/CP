@@ -32,12 +32,10 @@ static double4_t* double4_t_alloc(std::size_t n) {
 double sum(double4_t a, int nx)
 {
     double sum = 0;
-    for(int i = 0; i < std::min(4,nx); i++)
+    for(int i = 0; i < std::min(4,nx%4); i++)
     {
         sum += a[i];
-        std::cout << a[i] << std::endl;
     }
-    std::cout << "B" << std::endl;
     return sum;
 }
 
@@ -62,7 +60,7 @@ void corr(double4_t* a, int nvrow, int nx)
         stde = sum((a[x]-mean)*(a[x]-mean), nx);
         rowstde += stde;
     }
-
+    std::cout << rowstde << std::endl;
 
     // Finally, modify the array
     for(int x = 0; x < nvrow; x++)
@@ -95,8 +93,6 @@ void correlate(int ny, int nx, const float *data, float *result)
             }
         }    
     }
-    sum(vd[0], nx);
-
     for(int i = 0 ; i < ny ; i++)
     {
         for(int j = i; j < ny ; j++)
