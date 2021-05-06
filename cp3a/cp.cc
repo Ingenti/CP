@@ -37,6 +37,7 @@ double sum(double4_t a, int nx)
         sum += a[i];
         std::cout << a[i] << std::endl;
     }
+    std::cout << "B" << std::endl;
     return sum;
 }
 
@@ -79,8 +80,6 @@ void correlate(int ny, int nx, const float *data, float *result)
     //float nrow = ceil(nx/nb);
     int nvrow = (ny+nb-1)/nb;
     std::cout << "Number of vectors per row: "<< nvrow << std::endl;
-    double4_t* test = double4_t_alloc(nvrow);
-    sum(test[0],5);
 
     double4_t* vd = double4_t_alloc(ny*nvrow);
     double4_t* vt = double4_t_alloc(ny*nvrow);
@@ -96,6 +95,7 @@ void correlate(int ny, int nx, const float *data, float *result)
             }
         }    
     }
+    sum(vd[0]);
 
     for(int i = 0 ; i < ny ; i++)
     {
