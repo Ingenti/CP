@@ -34,11 +34,11 @@ double sum(double4_t a)
     return sum;
 }
 
-void corr(double4_t* a)
+void corr(double4_t* a, int nvrow)
 {
     double summa = 0;
     std::cout << "haloo!!!" << std::endl;
-    int len = sizeof(a)/sizeof(a[0]);
+    int len = nvrow;
 
     // Calculate the sum of the vectors of a row == sum of the row
     for(int i = 0; i < len ; i++)
@@ -107,8 +107,8 @@ void correlate(int ny, int nx, const float *data, float *result)
             }
                 for(int rivi = 0; rivi < nvrow; rivi++)
                 {
-                    corr(row);
-                    corr(row2);
+                    corr(row, nvrow);
+                    corr(row2, nvrow);
                     result[j+i*ny] += sum(row[rivi]*row2[rivi]);
                 }
                 result[j+i*ny] /= nx;
