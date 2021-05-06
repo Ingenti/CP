@@ -47,8 +47,6 @@ void corr(double4_t* a, int nvrow)
 
 
     double mean = summa/len;
-    std::cout << mean << std::endl;
-
     double stde = 0;
     double rowstde = 0;
 
@@ -63,7 +61,7 @@ void corr(double4_t* a, int nvrow)
     // Finally, modify the array
     for(int x = 0; x < len; x++)
     {
-        a[x] = (a[x]-mean)/stde;
+        a[x] = (a[x]-mean)/rowstde;
     }
 }
 
@@ -110,6 +108,7 @@ void correlate(int ny, int nx, const float *data, float *result)
                     corr(row, nvrow);
                     corr(row2, nvrow);
                     result[j+i*ny] += sum(row[rivi]*row2[rivi]);
+                    std::cout << sum(row[rivi]) << std::endl;
                 }
                 result[j+i*ny] /= nx;
             std::free(row);
