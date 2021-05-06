@@ -32,9 +32,10 @@ static double4_t* double4_t_alloc(std::size_t n) {
 double sum(double4_t a, int nx)
 {
     double sum = 0;
-    for(int i = 0; i < std::min(4,nx%4); i++)
+    for(int i = 0; i < 4; i++)
     {
         sum += a[i];
+        std::cout << a[i] << std::cout;
     }
     return sum;
 }
@@ -103,6 +104,9 @@ void correlate(int ny, int nx, const float *data, float *result)
             {
                 // Choose two rows to calculate corr for
                 row[c] = vd[c+i*nvrow];
+                std::cout << "JYSAHTI" << std::endl;
+                sum(row[c],nx);
+                std::cout << "MUNA" << std::endl;
                 row2[c] = vt[c+j*nvrow];
             }
             for(int rivi = 0; rivi < nvrow; rivi++)
