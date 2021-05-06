@@ -29,7 +29,7 @@ static double4_t* double4_t_alloc(std::size_t n) {
 
 
 
-double sum(double4_t a, int nx)
+double sum(double4_t a)
 {
     double sum = 0;
     for(int i = 0; i < 4; i++)
@@ -47,7 +47,7 @@ void corr(double4_t* a, int nvrow, int nx)
     // Calculate the sum of the vectors of a row == sum of the row
     for(int i = 0; i < nvrow ; i++)
     {
-        summa += sum(a[i], nx);
+        summa += sum(a[i]);
     }
 
 
@@ -58,7 +58,7 @@ void corr(double4_t* a, int nvrow, int nx)
     // Calculate stde of the row
     for(int x = 0; x < nvrow; x++)
     {
-        stde = sum((a[x]-mean)*(a[x]-mean), nx);
+        stde = sum((a[x]-mean)*(a[x]-mean));
         rowstde += stde;
     }
     std::cout << rowstde << std::endl;
@@ -105,7 +105,7 @@ void correlate(int ny, int nx, const float *data, float *result)
                 // Choose two rows to calculate corr for
                 row[c] = vd[c+i*nvrow];
                 std::cout << "JYSAHTI" << std::endl;
-                sum(row[c],nx);
+                sum(row[c]);
                 std::cout << "MUNA" << std::endl;
                 row2[c] = vt[c+j*nvrow];
             }
@@ -113,7 +113,7 @@ void correlate(int ny, int nx, const float *data, float *result)
             {
                 corr(row, nvrow, nx);
                 corr(row2, nvrow, nx);
-                result[j+i*ny] += sum(row[rivi]*row2[rivi], nx);
+                result[j+i*ny] += sum(row[rivi]*row2[rivi]);
             }
             result[j+i*ny] /= nx;
             std::free(row);
