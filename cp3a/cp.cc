@@ -76,6 +76,7 @@ void correlate(int ny, int nx, const float *data, float *result)
     // vectors per input row
     float nrow = ceil(nx/nb);
     int nvrow = static_cast<int>(nrow);
+    std::cout << nvrow << std::endl;
 
     double4_t* vd = double4_t_alloc(ny*nvrow);
     double4_t* vt = double4_t_alloc(ny*nvrow);
