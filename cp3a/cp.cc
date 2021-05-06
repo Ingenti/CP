@@ -26,8 +26,7 @@ static double4_t* double4_t_alloc(std::size_t n) {
 double sum(double4_t a, int nx)
 {
     double sum = 0;
-    int len = sizeof(a)/sizeof(a[0]);
-    for(int i = 0; i < std::min(len,nx); i++)
+    for(int i = 0; i < std::min(4,nx); i++)
     {
         sum += a[i];
     }
