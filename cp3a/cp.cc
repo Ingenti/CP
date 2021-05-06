@@ -27,6 +27,7 @@ double sum(double4_t a)
 {
     double sum = 0;
     int len = sizeof(a)/sizeof(a[0]);
+    std::cout << len << std::endl;
     for(int i = 0; i < len; i++)
     {
         sum += a[i];
@@ -56,7 +57,6 @@ void corr(double4_t* a, int nvrow)
         stde = sum((a[x]-mean)*(a[x]-mean));
         rowstde += stde;
     }
-    std::cout << rowstde << std::endl;
 
 
     // Finally, modify the array
