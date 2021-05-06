@@ -108,7 +108,7 @@ void correlate(int ny, int nx, const float *data, float *result)
                     corr(row, nvrow);
                     corr(row2, nvrow);
                     result[j+i*ny] += sum(row[rivi]*row2[rivi]);
-                    std::cout << sum(row[rivi]) << std::endl;
+                    std::cout << sum(row2[rivi]) << std::endl;
                 }
                 result[j+i*ny] /= nx;
             std::free(row);
