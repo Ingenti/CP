@@ -77,8 +77,8 @@ void correlate(int ny, int nx, const float *data, float *result)
 
     double4_t* vd = double4_t_alloc(ny*nvrow);
     double4_t* vt = double4_t_alloc(ny*nvrow);
-    vt = {nan("") nan("") nan("") nan("")};
-    vd = {nan("") nan("") nan("") nan("")};
+    vt = {nan("")};
+    vd = {nan("")};
 
     for(int y = 0 ; y < ny ; ++y)
     {
