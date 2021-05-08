@@ -91,7 +91,7 @@ void correlate(int ny, int nx, const float *data, float *result)
             for(int x = 0 ; x < std::min(nb,nx) ; ++x)
             {
                 vd[nvrow*y+k][x] = static_cast<double>(data[y*nx + x]);
-                vd[nvrow*y+k][x] = static_cast<double>(data[y*nx + x]);
+                vt[nvrow*y+k][x] = static_cast<double>(data[y*nx + x]);
             }
         }    
     }
