@@ -52,7 +52,7 @@ void correlate(int ny, int nx, const float *data, float *result)
             for(int j = 0; j < nx-nx%2; j+=2)
             {
                 ss += mat[j+c*nx]*mat[j+i*nx];
-                sss += mat[(j+1)+c*nx]*mat[j+i*nx];
+                sss += mat[(j+1)+c*nx]*mat[(j+1)+i*nx];
             }
             result[i+c*ny] = (ss+sss)/nx;
         }   
