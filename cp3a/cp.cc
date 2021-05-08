@@ -81,7 +81,10 @@ void correlate(int ny, int nx, const float *data, float *result)
     vd[0][1] = nan("");
     vd[0][2] = nan("");
     vd[0][3] = nan("");
-    vt = vd;
+    vt[0][0] = nan("");
+    vt[0][1] = nan("");
+    vt[0][2] = nan("");
+    vt[0][3] = nan("");
 
     for(int y = 0 ; y < ny ; ++y)
     {
@@ -119,7 +122,7 @@ void correlate(int ny, int nx, const float *data, float *result)
         }
     }
     std::free(vt);
-    //std::free(vd);
+    std::free(vd);
 }
 
 
