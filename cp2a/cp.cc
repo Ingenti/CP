@@ -49,16 +49,13 @@ void correlate(int ny, int nx, const float *data, float *result)
         {
             double s = 0;
             double ss = 0;
-            double sss = 0;
             for(int j = 0; j < nx; j++)
             {
-                ss += mat[j+i*nx]*mat[j+i*nx];
-                s += mat[j+c*nx]*mat[j+(i+1)*nx];
-                sss += mat[j+c*nx]*mat[j+i*nx];
+                ss += mat[j+c*nx]*mat[j+i*nx];
+                s += mat[j+(c+1)*nx]*mat[j+(i+1)*nx];
             }
-            result[i+i*ny] = ss/nx;
-            result[(i+1)+c*ny] = s/nx;
-            result[(i)+(c)*ny] = sss/nx;
+            result[i+c*ny] = ss/nx;
+            result[(i+1)+(c+1)*ny] = s/nx;
         }   
     }
 }
