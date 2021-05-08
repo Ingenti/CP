@@ -33,6 +33,7 @@ double sum(double4_t a)
         sum += a[i];
         std::cout <<"summa:" <<a[i]<<std::endl;
     }
+    std::cout << "loppu" << std::endl;
     return sum;
 }
 
