@@ -13,11 +13,6 @@ This is the function you need to implement. Quick reference:
 - only parts with 0 <= j <= i < ny need to be filled
 */
 typedef double double4_t __attribute__ ((vector_size (4 * sizeof(double))));
-constexpr double infty = std::numeric_limits<double>::infinity();
-
-constexpr double4_t d4infty {
-    infty, infty, infty, infty,
-};
 
 static double4_t* double4_t_alloc(std::size_t n) {
     void* tmp = 0;
@@ -82,6 +77,8 @@ void correlate(int ny, int nx, const float *data, float *result)
 
     double4_t* vd = double4_t_alloc(ny*nvrow);
     double4_t* vt = double4_t_alloc(ny*nvrow);
+    vt = {nan("") nan("") nan("") nan("")};
+    vd = {nan("") nan("") nan("") nan("")};
 
     for(int y = 0 ; y < ny ; ++y)
     {
@@ -100,20 +97,18 @@ void correlate(int ny, int nx, const float *data, float *result)
         {
             double4_t* row = double4_t_alloc(nvrow);
             double4_t* row2 = double4_t_alloc(nvrow);
+            
             for(int c = 0; c < nvrow; c++)
             {
                 // Choose two rows to calculate corr for
                 row[c] = vd[c+i*nvrow];
-                std::cout << "JYSAHTI" << std::endl;
-                sum(row[c]);
-                std::cout << "MUNA" << std::endl;
                 row2[c] = vt[c+j*nvrow];
             }
-            for(int rivi = 0; rivi < nvrow; rivi++)
+            for(int dvec = 0; dvec < nvrow; dvec++)
             {
                 corr(row, nvrow, nx);
                 corr(row2, nvrow, nx);
-                result[j+i*ny] += sum(row[rivi]*row2[rivi]);
+                result[j+i*ny] += sum(row[dvec]*row2[dvec]);
             }
             result[j+i*ny] /= nx;
             std::free(row);
