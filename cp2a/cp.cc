@@ -43,7 +43,7 @@ void correlate(int ny, int nx, const float *data, float *result)
         }
     }
 
-    for(int c = 0; c < ny; c+=2)
+    for(int c = 0; c < ny; c++)
     {
         for(int i = c; i < ny-ny%2; i+=2)
         {
@@ -56,7 +56,6 @@ void correlate(int ny, int nx, const float *data, float *result)
             }
             result[i+c*ny] = ss/nx;
             result[(i+1)+c*ny] = sss/nx;
-
         }   
     }
 }
