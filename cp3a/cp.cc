@@ -31,7 +31,7 @@ double sum(double4_t a)
     {
         if(isnan(a[i])){continue;}
         sum += a[i];
-        std::cout <<"summa:" <<a[i];
+        std::cout <<"summa:" <<a[i]<<std::endl;
     }
     return sum;
 }
