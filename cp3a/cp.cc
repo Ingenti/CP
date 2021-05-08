@@ -84,6 +84,14 @@ void correlate(int ny, int nx, const float *data, float *result)
     vt[0][1] = nan("");
     vt[0][2] = nan("");
     vt[0][3] = nan("");
+    vd[1][0] = nan("");
+    vd[1][1] = nan("");
+    vd[1][2] = nan("");
+    vd[1][3] = nan("");
+    vt[1][0] = nan("");
+    vt[1][1] = nan("");
+    vt[1][2] = nan("");
+    vt[1][3] = nan("");
 
     for(int y = 0 ; y < ny ; ++y)
     {
