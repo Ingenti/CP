@@ -31,6 +31,7 @@ double sum(double4_t a)
     {
         if(isnan(a[i])){continue;}
         sum += a[i];
+        std::cout <<"summa:" <<a[i];
     }
     return sum;
 }
@@ -47,7 +48,6 @@ void corr(double4_t* a, int nvrow, int nx)
 
 
     double mean = summa/(nx);
-    double stde = 0;
     double rowstde = 0;
 
     // Calculate stde of the row
