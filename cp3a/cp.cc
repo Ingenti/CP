@@ -98,7 +98,6 @@ void correlate(int ny, int nx, const float *data, float *result)
             {
                 vd[nvrow*y+k][x] = static_cast<double>(data[y*nx + x]);
             }
-            std::cout << k<<std::endl;
             if(k == (nvrow-2))
             {
                 vd[nvrow*y+k+1] = dnan;
@@ -107,6 +106,8 @@ void correlate(int ny, int nx, const float *data, float *result)
                     vd[nvrow*y+k+1][t] = static_cast<double>(data[y*nx + t + (nvrow-1)*nb]);
                 }
                 k++;
+                std::cout << k<<std::endl;
+
             }
 
         }    
