@@ -76,22 +76,6 @@ void correlate(int ny, int nx, const float *data, float *result)
 
     double4_t* vd = double4_t_alloc(ny*nvrow);
     double4_t* vt = double4_t_alloc(ny*nvrow);
-    vd[0][0] = nan("");
-    vd[0][1] = nan("");
-    vd[0][2] = nan("");
-    vd[0][3] = nan("");
-    vt[0][0] = nan("");
-    vt[0][1] = nan("");
-    vt[0][2] = nan("");
-    vt[0][3] = nan("");
-    vd[1][0] = nan("");
-    vd[1][1] = nan("");
-    vd[1][2] = nan("");
-    vd[1][3] = nan("");
-    vt[1][0] = nan("");
-    vt[1][1] = nan("");
-    vt[1][2] = nan("");
-    vt[1][3] = nan("");
 
     for(int y = 0 ; y < ny ; ++y)
     {
@@ -110,6 +94,7 @@ void correlate(int ny, int nx, const float *data, float *result)
         {
             double4_t* row = double4_t_alloc(nvrow);
             double4_t* row2 = double4_t_alloc(nvrow);
+            std::fill(row.begin(), row.end(), nan(""));
             
             for(int c = 0; c < nvrow; c++)
             {
