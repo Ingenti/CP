@@ -118,7 +118,6 @@ void correlate(int ny, int nx, const float *data, float *result)
                 row2[c] = vd[c+j*nvrow];
             }
             corr(row, nvrow, nx);
-            std::cout<<"JYSAHTI "<<sum(row[j])<<"MUNA"<<std::endl;
             corr(row2, nvrow, nx);
             for(int dvec = 0; dvec < nvrow; dvec++)
             {
