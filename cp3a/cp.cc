@@ -98,18 +98,15 @@ void correlate(int ny, int nx, const float *data, float *result)
             {
                 vd[nvrow*y+k][x] = static_cast<double>(data[y*nx + x + (k*4)]);
             }
-            if(k == (nvrow-2))
+            if(k == (nvrow-2) && jj!=0)
             {
                 vd[nvrow*y+k+1] = dnan;
                 for(int t = 0; t < jj; t++)
                 {
-                    vd[nvrow*y+k+1][t] = static_cast<double>(data[y*nx + t + (nvrow-1)*nb]);
+                    vd[nvrow*y+k+1][t] = static_cast<double>(data[y*nx + t + (nvrow-1)*4]);
                 }
                 k++;
-                std::cout << k<<std::endl;
-
             }
-
         }    
     }
 
@@ -124,9 +121,7 @@ void correlate(int ny, int nx, const float *data, float *result)
             {
                 // Choose two rows to calculate corr for
                 row[c] = vd[c+i*nvrow];
-                print(row[c]);
                 row2[c] = vd[c+j*nvrow];
-                print(row2[c]);
             }
             corr(row, nvrow, nx);
             corr(row2, nvrow, nx);
