@@ -125,11 +125,12 @@ void correlate(int ny, int nx, const float *data, float *result)
             }
             corr(row, nvrow, nx);
             corr(row2, nvrow, nx);
+            double s = 0;
             for(int dvec = 0; dvec < nvrow; dvec++)
             {
-                result[j+i*ny] += sum(row[dvec]*row2[dvec]);
+                s += sum(row[dvec]*row2[dvec]);
             }
-            result[j+i*ny] /= nx;
+            result[j+i*ny] = s/nx;
             std::free(row);
             std::free(row2);
         }
