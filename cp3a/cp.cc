@@ -2,6 +2,7 @@
 #include <vector>
 #include <stdlib.h>
 #include <malloc.h>
+#include <limits>
 /*
 This is the function you need to implement. Quick reference:
 - input rows: 0 <= y < ny
@@ -11,9 +12,9 @@ This is the function you need to implement. Quick reference:
 - only parts with 0 <= j <= i < ny need to be filled
 */
 typedef double double4_t __attribute__ ((vector_size (4 * sizeof(double))));
-constexpr double nana = nan("");
+constexpr double infty = std::numeric_limits<double>::infinity();
 constexpr double4_t dnan {
-    nana, nana, nana, nana
+    infty, infty, infty, infty
 };
 
 static double4_t* double4_t_alloc(std::size_t n) {
@@ -29,7 +30,7 @@ double sum(double4_t a)
     double sum = 0;
     for(int i = 0; i < 4; i++)
     {
-        if(isnan(a[i])){continue;}
+        if((a[i])==infty){continue;}
         sum += a[i];
     }
     return sum;
