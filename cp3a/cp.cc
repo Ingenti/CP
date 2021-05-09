@@ -36,7 +36,6 @@ double sum(double4_t a)
         if(isnan(a[i])){continue;}
         sum += a[i];
     }
-    std::cout << sum << std::endl;
     return sum;
 }
 
@@ -79,6 +78,7 @@ void correlate(int ny, int nx, const float *data, float *result)
 
     double4_t* vd = double4_t_alloc(ny*nvrow);
     //double4_t* vt = double4_t_alloc(ny*nvrow);
+    int jj = nx%nb;
 
     for(int y = 0 ; y < ny ; ++y)
     {
@@ -89,6 +89,13 @@ void correlate(int ny, int nx, const float *data, float *result)
             for(int x = 0 ; x < std::min(nb,nx) ; ++x)
             {
                 vd[nvrow*y+k][x] = static_cast<double>(data[y*nx + x]);
+            }
+            if(k == nvrow-2){
+            for(int t = 0; t < jj; t++)
+            {
+                vd[nvrow*y+k+1][t] = static_cast<double>(data[y*nx + t]);
+                k++;
+            }
             }
         }    
     }
