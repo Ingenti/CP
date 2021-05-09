@@ -108,7 +108,7 @@ void correlate(int ny, int nx, const float *data, float *result)
             for(int dvec = 0; dvec < nvrow; dvec++)
             {
                 corr(row, nvrow, nx);
-                std::cout <<"JYSAHTI"<< sum(row) <<"joku" <<std::endl;
+                std::cout <<"JYSAHTI"<< sum(row[dvec]) <<"joku" <<std::endl;
                 corr(row2, nvrow, nx);
                 result[j+i*ny] += sum(row[dvec]*row2[dvec]);
             }
