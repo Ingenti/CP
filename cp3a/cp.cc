@@ -98,14 +98,14 @@ void correlate(int ny, int nx, const float *data, float *result)
     }
 
     #pragma omp parallel for
-    for(int i = 0 ; i < ny ; i++)
+    for(int i = 0 ; i < ny ; ++i)
     {
-        for(int j = i; j < ny ; j++)
+        for(int j = i; j < ny ; ++j)
         {
             double4_t* row = double4_t_alloc(nvrow);
             double4_t* row2 = double4_t_alloc(nvrow);
 
-            for(int c = 0; c < nvrow; c++)
+            for(int c = 0; c < nvrow; ++c)
             {
                 // Choose two rows to calculate corr for
                 row[c] = vd[c+i*nvrow];
@@ -114,7 +114,7 @@ void correlate(int ny, int nx, const float *data, float *result)
             corr(row, nvrow, nx);
             corr(row2, nvrow, nx);
             double s = 0;
-            for(int dvec = 0; dvec < nvrow; dvec++)
+            for(int dvec = 0; dvec < nvrow; ++dvec)
             {
                 s += sum(row[dvec]*row2[dvec]);
             }
