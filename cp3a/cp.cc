@@ -114,11 +114,10 @@ void correlate(int ny, int nx, const float *data, float *result)
                 row[c] = vd[c+i*nvrow];
                 row2[c] = vd[c+j*nvrow];
             }
+            corr(row, nvrow, nx);
+            corr(row2, nvrow, nx);
             for(int dvec = 0; dvec < nvrow; dvec++)
             {
-                corr(row, nvrow, nx);
-                corr(row2, nvrow, nx);
-
                 result[j+i*ny] += sum(row[dvec]*row2[dvec]);
             }
             result[j+i*ny] /= nx;
