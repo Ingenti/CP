@@ -2,8 +2,6 @@
 #include <vector>
 #include <stdlib.h>
 #include <malloc.h>
-#include <iostream>
-#include <limits>
 /*
 This is the function you need to implement. Quick reference:
 - input rows: 0 <= y < ny
@@ -24,16 +22,6 @@ static double4_t* double4_t_alloc(std::size_t n) {
         throw std::bad_alloc();
     }
     return (double4_t*)tmp;
-}
-
-void print(double4_t a)
-{
-    std::cout << "muna" << std::endl;
-    for(int i = 0; i < 4; i++)
-    {
-        std::cout << a[i] << std::endl;
-    }
-    std::cout << "jysahti" << std::endl;
 }
 
 double sum(double4_t a)
@@ -82,12 +70,11 @@ void correlate(int ny, int nx, const float *data, float *result)
     // vectors per input row
     int nvrow = static_cast<int>((ceil(static_cast<double>(nx)/static_cast<double>(nb))));
 
-    std::cout << "Number of vectors per row: "<< nvrow << std::endl;
-
     double4_t* vd = double4_t_alloc(ny*nvrow);
     //double4_t* vt = double4_t_alloc(ny*nvrow);
     int jj = nx%nb;
 
+    #pragma omp parallel for
     for(int y = 0 ; y < ny ; ++y)
     {
         for(int k = 0 ; k < nvrow ; ++k)
