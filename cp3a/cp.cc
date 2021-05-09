@@ -14,6 +14,10 @@ This is the function you need to implement. Quick reference:
 */
 typedef double double4_t __attribute__ ((vector_size (4 * sizeof(double))));
 
+constexpr double4_t dnan {
+    nan(""), nan(""), nan(""), nan("")
+};
+
 static double4_t* double4_t_alloc(std::size_t n) {
     void* tmp = 0;
     if (posix_memalign(&tmp, sizeof(double4_t), sizeof(double4_t) * n)) {
@@ -81,6 +85,8 @@ void correlate(int ny, int nx, const float *data, float *result)
     {
         for(int k = 0 ; k < nvrow ; ++k)
         {
+            vd[nvrow*y+k] = dnan;
+            vt[nvrow*y+k] = dnan;
             for(int x = 0 ; x < std::min(nb,nx) ; ++x)
             {
                 vd[nvrow*y+k][x] = static_cast<double>(data[y*nx + x]);
@@ -94,8 +100,7 @@ void correlate(int ny, int nx, const float *data, float *result)
         {
             double4_t* row = double4_t_alloc(nvrow);
             double4_t* row2 = double4_t_alloc(nvrow);
-            std::fill(row.begin(), row.end(), nan(""));
-            
+
             for(int c = 0; c < nvrow; c++)
             {
                 // Choose two rows to calculate corr for
