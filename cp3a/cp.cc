@@ -11,9 +11,9 @@ This is the function you need to implement. Quick reference:
 - only parts with 0 <= j <= i < ny need to be filled
 */
 typedef double double4_t __attribute__ ((vector_size (4 * sizeof(double))));
-
+constexpr double nana = nan("");
 constexpr double4_t dnan {
-    nan(""), nan(""), nan(""), nan("")
+    nana, nana, nana, nana
 };
 
 static double4_t* double4_t_alloc(std::size_t n) {
@@ -116,6 +116,7 @@ void correlate(int ny, int nx, const float *data, float *result)
             double s = 0;
             for(int dvec = 0; dvec < nvrow; ++dvec)
             {
+                
                 s += sum(row[dvec]*row2[dvec]);
             }
             result[j+i*ny] = s/nx;
