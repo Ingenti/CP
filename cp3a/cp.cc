@@ -27,7 +27,6 @@ static double4_t* double4_t_alloc(std::size_t n) {
 double sum(double4_t a)
 {
     double sum = 0;
-    #pragma omp parallel for
     for(int i = 0; i < 4; i++)
     {
         if(isnan(a[i])){continue;}
