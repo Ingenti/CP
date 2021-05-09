@@ -33,9 +33,8 @@ double sum(double4_t a)
     double sum = 0;
     for(int i = 0; i < 4; i++)
     {
-        if(isnan(a[i])){continue;}
+        if(isnan(a[i])){std::cout<<a[i]<<std::endl;continue;}
         sum += a[i];
-        std::cout<<a[i]<<std::endl;
 
     }
     return sum;
