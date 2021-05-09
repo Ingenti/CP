@@ -114,7 +114,7 @@ void correlate(int ny, int nx, const float *data, float *result)
             {
                 // Choose two rows to calculate corr for
                 row[c] = vd[c+i*nvrow];
-                row2[c] = vt[c+j*nvrow];
+                row2[c] = vd[c+j*nvrow];
             }
             corr(row, nvrow, nx);
             corr(row2, nvrow, nx);
