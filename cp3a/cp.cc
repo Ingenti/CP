@@ -40,7 +40,6 @@ void corr(double4_t* a, int nvrow, int nx)
     double summa = 0;
 
     // Calculate the sum of the vectors of a row == sum of the row
-    #pragma omp parallel for
     for(int i = 0; i < nvrow ; i++)
     {
         summa += sum(a[i]);
