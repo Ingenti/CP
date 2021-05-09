@@ -84,7 +84,7 @@ void correlate(int ny, int nx, const float *data, float *result)
 
     for(int y = 0 ; y < ny ; ++y)
     {
-        for(int k = 0 ; k < nvrow ; ++k)
+        for(int k = 0 ; k < nvrow ; k++)
         {
             vd[nvrow*y+k] = dnan;
             //vt[nvrow*y+k] = dnan;
@@ -93,7 +93,8 @@ void correlate(int ny, int nx, const float *data, float *result)
                 vd[nvrow*y+k][x] = static_cast<double>(data[y*nx + x]);
             }
 
-            if(k == nvrow-2){
+            if(k == nvrow-2)
+            {
                 vd[nvrow*y+k+1] = dnan;
             for(int t = 0; t < jj; t++)
             {
@@ -101,6 +102,7 @@ void correlate(int ny, int nx, const float *data, float *result)
             }
             k++;
             }
+
         }    
     }
 
