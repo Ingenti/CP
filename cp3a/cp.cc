@@ -71,7 +71,7 @@ void correlate(int ny, int nx, const float *data, float *result)
     int nvrow = static_cast<int>((ceil(static_cast<double>(nx)/static_cast<double>(nb))));
 
     double4_t* vd = double4_t_alloc(ny*nvrow);
-    //double4_t* vt = double4_t_alloc(ny*nvrow);
+    double4_t* vt = double4_t_alloc(ny*nvrow);
     int jj = nx%nb;
     int mimi = std::min(nb,nx);
 
@@ -81,11 +81,14 @@ void correlate(int ny, int nx, const float *data, float *result)
         for(int k = 0 ; k < nvrow ; ++k)
         {
             vd[nvrow*y+k] = dnan;
-            //vt[nvrow*y+k] = dnan;
+            vt[nvrow*y+k] = dnan;
             for(int x = 0 ; x < mimi ; ++x)
             {
                 vd[nvrow*y+k][x] = static_cast<double>(data[y*nx + x + (k*4)]);
+                vt[nvrow*y+k][x] = static_cast<double>(data[y*nx + x + (k*4)]);
+
             }
+            /*
             if(k == (nvrow-2) && jj!=0)
             {
                 vd[nvrow*y+k+1] = dnan;
@@ -95,6 +98,7 @@ void correlate(int ny, int nx, const float *data, float *result)
                 }
                 k++;
             }
+            */
         }    
     }
 
