@@ -56,7 +56,7 @@ void corr(double4_t* a, int nvrow, int nx)
     }
     rowstde = sqrt(rowstde/nx);
     // Finally, modify the array
-
+    #pragma omp parallel for
     for(int x = 0; x < nvrow; x++)
     {
         a[x] = (a[x]-mean)/rowstde;
@@ -127,53 +127,3 @@ void correlate(int ny, int nx, const float *data, float *result)
     }
     std::free(vd);
 }
-
-
-
-
-/*
-        double sum = 0;
-        // Calculate the mean of the row
-        double mean = sum/nx;
-        
-        // Normalize the row by subtracting mean from each of the elements
-        // Normalize so that the sum of the squares is 1
-        double stde = 0;
-        for(x = 0; x < nx; x++)
-        {
-            stde+=pow(data[y*nx+x]-mean,2);
-        }
-        stde = sqrt(stde/nx);
-        #pragma omp parallel for
-        for(x = 0; x < nx ; x++)
-        {
-            mat.push_back((static_cast<double>(data[y*nx + x])-mean)/stde);
-        }
-    }
-
-
-    #pragma omp parallel for  
-    for(int c = 0; c < ny; c++)
-    {
-        for(int i = c; i < ny; i++)
-        {
-            double s = 0;
-            double ss = 0;
-            for(int j = 0; j < nx; j++)
-            {
-                double4_t row = vd[]
-                ss += mat[j+c*nx]*mat[j+i*nx];
-            }
-            result[i+c*ny] = ss/nx;
-        }   
-    }
-}
-
-for(int i = 0; i < nx ; i++)
-{
-    double4_t row = vd[i];
-    double4_t row2 = vt[i];
-    row*row2
-}
-
-*/
