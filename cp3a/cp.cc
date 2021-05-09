@@ -90,7 +90,7 @@ void correlate(int ny, int nx, const float *data, float *result)
 
     for(int y = 0 ; y < ny ; ++y)
     {
-        for(int k = 0 ; k < nvrow ; k++)
+        for(int k = 0 ; k < nvrow ; ++k)
         {
             vd[nvrow*y+k] = dnan;
             //vt[nvrow*y+k] = dnan;
