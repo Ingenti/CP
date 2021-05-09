@@ -52,6 +52,7 @@ void corr(double4_t* a, int nvrow, int nx)
 
 
     double mean = summa/(nx);
+    std::cout<<mean<<std::endl;
     double rowstde = 0;
 
     // Calculate stde of the row
@@ -116,9 +117,7 @@ void correlate(int ny, int nx, const float *data, float *result)
             }
             for(int dvec = 0; dvec < nvrow; dvec++)
             {
-                std::cout << "Jytisee" << std::endl;
                 corr(row, nvrow, nx);
-                std::cout <<"muna" <<std::endl;
                 corr(row2, nvrow, nx);
 
                 result[j+i*ny] += sum(row[dvec]*row2[dvec]);
