@@ -36,7 +36,6 @@ double sum(double4_t a)
         if(isnan(a[i])){continue;}
         sum += a[i];
     }
-    std::cout<<sum<<std::endl;
     return sum;
 }
 
@@ -109,6 +108,7 @@ void correlate(int ny, int nx, const float *data, float *result)
             for(int dvec = 0; dvec < nvrow; dvec++)
             {
                 corr(row, nvrow, nx);
+                std::cout <<"JYSAHTI"<< sum(row) <<"joku" <<std::endl;
                 corr(row2, nvrow, nx);
                 result[j+i*ny] += sum(row[dvec]*row2[dvec]);
             }
