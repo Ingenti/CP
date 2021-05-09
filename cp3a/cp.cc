@@ -27,6 +27,7 @@ static double4_t* double4_t_alloc(std::size_t n) {
 double sum(double4_t a)
 {
     double sum = 0;
+    #pragma omp parallel for
     for(int i = 0; i < 4; i++)
     {
         if(isnan(a[i])){continue;}
@@ -40,6 +41,7 @@ void corr(double4_t* a, int nvrow, int nx)
     double summa = 0;
 
     // Calculate the sum of the vectors of a row == sum of the row
+    #pragma omp parallel for
     for(int i = 0; i < nvrow ; i++)
     {
         summa += sum(a[i]);
@@ -50,12 +52,15 @@ void corr(double4_t* a, int nvrow, int nx)
     double rowstde = 0;
 
     // Calculate stde of the row
+    #pragma omp parallel for
     for(int x = 0; x < nvrow; x++)
     {
         rowstde += sum((a[x]-mean)*(a[x]-mean));
     }
     rowstde = sqrt(rowstde/nx);
     // Finally, modify the array
+
+    #pragma omp parallel for
     for(int x = 0; x < nvrow; x++)
     {
         a[x] = (a[x]-mean)/rowstde;
