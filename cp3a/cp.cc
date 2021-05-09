@@ -38,7 +38,7 @@ double sum(double4_t a)
 void corr(double4_t* a, int nvrow, int nx)
 {
     double summa = 0;
-
+    #pragma omp parallel for
     // Calculate the sum of the vectors of a row == sum of the row
     for(int i = 0; i < nvrow ; i++)
     {
@@ -50,7 +50,6 @@ void corr(double4_t* a, int nvrow, int nx)
     double rowstde = 0;
 
     // Calculate stde of the row
-    #pragma omp parallel for
     for(int x = 0; x < nvrow; x++)
     {
         rowstde += sum((a[x]-mean)*(a[x]-mean));
