@@ -85,7 +85,7 @@ void correlate(int ny, int nx, const float *data, float *result)
         for(int k = 0 ; k < nvrow ; ++k)
         {
             vd[nvrow*y+k] = dnan;
-            vt[nvrow*y+k] = dnan;
+            //vt[nvrow*y+k] = dnan;
             for(int x = 0 ; x < std::min(nb,nx) ; ++x)
             {
                 vd[nvrow*y+k][x] = static_cast<double>(data[y*nx + x]);
