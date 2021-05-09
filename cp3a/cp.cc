@@ -74,6 +74,7 @@ void correlate(int ny, int nx, const float *data, float *result)
     double4_t* vd = double4_t_alloc(ny*nvrow);
     //double4_t* vt = double4_t_alloc(ny*nvrow);
     int jj = nx%nb;
+    int mimi = std::min(nb,nx);
 
     #pragma omp parallel for
     for(int y = 0 ; y < ny ; ++y)
@@ -82,7 +83,7 @@ void correlate(int ny, int nx, const float *data, float *result)
         {
             vd[nvrow*y+k] = dnan;
             //vt[nvrow*y+k] = dnan;
-            for(int x = 0 ; x < std::min(nb,nx) ; ++x)
+            for(int x = 0 ; x < mimi ; ++x)
             {
                 vd[nvrow*y+k][x] = static_cast<double>(data[y*nx + x + (k*4)]);
             }
