@@ -50,13 +50,13 @@ void corr(double4_t* a, int nvrow, int nx)
     double rowstde = 0;
 
     // Calculate stde of the row
+    #pragma omp parallel for
     for(int x = 0; x < nvrow; x++)
     {
         rowstde += sum((a[x]-mean)*(a[x]-mean));
     }
     rowstde = sqrt(rowstde/nx);
     // Finally, modify the array
-    #pragma omp parallel for
     for(int x = 0; x < nvrow; x++)
     {
         a[x] = (a[x]-mean)/rowstde;
