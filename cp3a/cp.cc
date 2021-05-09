@@ -36,6 +36,7 @@ double sum(double4_t a)
         if(isnan(a[i])){continue;}
         sum += a[i];
     }
+    std::cout<<sum<<std::endl;
     return sum;
 }
 
@@ -59,7 +60,6 @@ void corr(double4_t* a, int nvrow, int nx)
         rowstde += sum((a[x]-mean)*(a[x]-mean));
     }
     rowstde = sqrt(rowstde/nx);
-    std::cout << rowstde << std::endl;
     // Finally, modify the array
     for(int x = 0; x < nvrow; x++)
     {
