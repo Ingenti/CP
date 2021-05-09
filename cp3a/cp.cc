@@ -110,6 +110,7 @@ void correlate(int ny, int nx, const float *data, float *result)
         }    
     }
 
+    #pragma omp parallel for
     for(int i = 0 ; i < ny ; i++)
     {
         for(int j = i; j < ny ; j++)
