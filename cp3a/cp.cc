@@ -56,6 +56,7 @@ void corr(double4_t* a, int nvrow, int nx)
     {
         rowstde += sum((a[x]-mean)*(a[x]-mean));
     }
+    rowstde = sqrt(rowstde/nx);
     std::cout << rowstde << std::endl;
     // Finally, modify the array
     for(int x = 0; x < nvrow; x++)
